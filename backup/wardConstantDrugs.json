@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "wardId": "1",
+    "setId": 1,
+    "drugId": 1,
+    "quantity": 100,
+    "displayOrder": 0
+  },
+  {
+    "id": 2,
+    "wardId": "1",
+    "setId": 1,
+    "drugId": 3,
+    "quantity": 50,
+    "displayOrder": 0
+  },
+  {
+    "id": 3,
+    "wardId": "2",
+    "setId": 2,
+    "drugId": 2,
+    "quantity": 80,
+    "displayOrder": 0
+  },
+  {
+    "id": 4,
+    "wardId": "2",
+    "setId": 2,
+    "drugId": 4,
+    "quantity": 20,
+    "displayOrder": 0
+  },
+  {
+    "id": 5,
+    "wardId": "1",
+    "setId": 3,
+    "drugId": 5,
+    "quantity": 1,
+    "displayOrder": 0
+  },
+  {
+    "id": 6,
+    "wardId": "1",
+    "setId": 3,
+    "drugId": 3,
+    "quantity": 11,
+    "displayOrder": 1
+  }
+]

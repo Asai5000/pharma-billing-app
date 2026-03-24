@@ -1,0 +1,22 @@
+[
+  {
+    "key": "payout_day_of_week",
+    "value": "4"
+  },
+  {
+    "key": "deadline_days_before",
+    "value": "2"
+  },
+  {
+    "key": "monitor_target_type",
+    "value": "temporary"
+  },
+  {
+    "key": "monitor_date_range",
+    "value": "0"
+  },
+  {
+    "key": "monitor_pending_date_range",
+    "value": "0"
+  }
+]

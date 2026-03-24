@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "内科病棟",
+    "password": "naika123",
+    "role": "user",
+    "isInactive": false
+  },
+  {
+    "id": "2",
+    "name": "外科病棟",
+    "password": "geka456",
+    "role": "user",
+    "isInactive": false
+  },
+  {
+    "id": "admin",
+    "name": "管理者",
+    "password": "admin",
+    "role": "admin",
+    "isInactive": false
+  }
+]

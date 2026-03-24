@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "アセトアミノフェン錠 500mg",
+    "furigana": "あせとあみのふぇん",
+    "category": "解熱鎮痛剤",
+    "unit": "錠",
+    "allowComment": false,
+    "isInactive": false
+  },
+  {
+    "id": 2,
+    "name": "イブプロフェン錠 200mg",
+    "furigana": "いぶぷろふぇん",
+    "category": "解熱鎮痛剤",
+    "unit": "錠",
+    "allowComment": false,
+    "isInactive": false
+  },
+  {
+    "id": 3,
+    "name": "生理食塩水500ml",
+    "furigana": "せいりしょくえんすい",
+    "category": "輸液",
+    "unit": "ml",
+    "allowComment": false,
+    "isInactive": false
+  },
+  {
+    "id": 4,
+    "name": "インスリン注射液",
+    "furigana": "いんすりん",
+    "category": "糖尿病薬",
+    "unit": "本",
+    "allowComment": false,
+    "isInactive": false
+  },
+  {
+    "id": 5,
+    "name": "アモキシシリン錠 250mg",
+    "furigana": "あもきししりん",
+    "category": "抗生物質",
+    "unit": "錠",
+    "allowComment": false,
+    "isInactive": false
+  },
+  {
+    "id": 6,
+    "name": "デエビゴ錠5mg",
+    "furigana": "でえびご",
+    "category": "その他",
+    "unit": "錠",
+    "allowComment": false,
+    "isInactive": false
+  },
+  {
+    "id": 7,
+    "name": "未登録薬",
+    "furigana": "みとうろく",
+    "category": "その他",
+    "unit": "未登録",
+    "allowComment": true,
+    "isInactive": false
+  }
+]

@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "orderId": 1,
+    "drugId": 1,
+    "quantity": 10,
+    "approvedQuantity": 10,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 2,
+    "orderId": 1,
+    "drugId": 5,
+    "quantity": 5,
+    "approvedQuantity": 5,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 3,
+    "orderId": 2,
+    "drugId": 2,
+    "quantity": 50,
+    "approvedQuantity": 38,
+    "rejectedQuantity": 0,
+    "status": "部分承認",
+    "comment": null
+  },
+  {
+    "id": 4,
+    "orderId": 2,
+    "drugId": 4,
+    "quantity": 10,
+    "approvedQuantity": 4,
+    "rejectedQuantity": 0,
+    "status": "部分承認",
+    "comment": "在庫不足のため半数のみ"
+  },
+  {
+    "id": 5,
+    "orderId": 3,
+    "drugId": 1,
+    "quantity": 13,
+    "approvedQuantity": 13,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 6,
+    "orderId": 3,
+    "drugId": 2,
+    "quantity": 16,
+    "approvedQuantity": 16,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 7,
+    "orderId": 4,
+    "drugId": 6,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": null
+  },
+  {
+    "id": 8,
+    "orderId": 5,
+    "drugId": 1,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": null
+  },
+  {
+    "id": 9,
+    "orderId": 6,
+    "drugId": 6,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "却下",
+    "comment": null
+  },
+  {
+    "id": 10,
+    "orderId": 7,
+    "drugId": 3,
+    "quantity": 1,
+    "approvedQuantity": 1,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 11,
+    "orderId": 8,
+    "drugId": 1,
+    "quantity": 1,
+    "approvedQuantity": 1,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 12,
+    "orderId": 9,
+    "drugId": 5,
+    "quantity": 1,
+    "approvedQuantity": 1,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 13,
+    "orderId": 10,
+    "drugId": 4,
+    "quantity": 1,
+    "approvedQuantity": 1,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 14,
+    "orderId": 11,
+    "drugId": 5,
+    "quantity": 10,
+    "approvedQuantity": 10,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 15,
+    "orderId": 12,
+    "drugId": 2,
+    "quantity": 4,
+    "approvedQuantity": 4,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 16,
+    "orderId": 13,
+    "drugId": 5,
+    "quantity": 4,
+    "approvedQuantity": 2,
+    "rejectedQuantity": 0,
+    "status": "部分承認",
+    "comment": null
+  },
+  {
+    "id": 17,
+    "orderId": 14,
+    "drugId": 7,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": "マンジャロ　１本　清水"
+  },
+  {
+    "id": 18,
+    "orderId": 15,
+    "drugId": 7,
+    "quantity": 3,
+    "approvedQuantity": 3,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": "フロモックス　３錠"
+  },
+  {
+    "id": 19,
+    "orderId": 16,
+    "drugId": 7,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": "インスリン"
+  },
+  {
+    "id": 20,
+    "orderId": 18,
+    "drugId": 1,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": null
+  },
+  {
+    "id": 21,
+    "orderId": 19,
+    "drugId": 3,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": null
+  },
+  {
+    "id": 22,
+    "orderId": 21,
+    "drugId": 3,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": null
+  },
+  {
+    "id": 23,
+    "orderId": 23,
+    "drugId": 1,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": null
+  },
+  {
+    "id": 25,
+    "orderId": 24,
+    "drugId": 1,
+    "quantity": 2,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": null
+  },
+  {
+    "id": 27,
+    "orderId": 26,
+    "drugId": 5,
+    "quantity": 1,
+    "approvedQuantity": 1,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 28,
+    "orderId": 27,
+    "drugId": 4,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": null
+  },
+  {
+    "id": 29,
+    "orderId": 28,
+    "drugId": 1,
+    "quantity": 1,
+    "approvedQuantity": 1,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 30,
+    "orderId": 28,
+    "drugId": 2,
+    "quantity": 1,
+    "approvedQuantity": 1,
+    "rejectedQuantity": 0,
+    "status": "承認済み",
+    "comment": null
+  },
+  {
+    "id": 31,
+    "orderId": 29,
+    "drugId": 3,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": null
+  },
+  {
+    "id": 32,
+    "orderId": 29,
+    "drugId": 5,
+    "quantity": 1,
+    "approvedQuantity": 0,
+    "rejectedQuantity": 0,
+    "status": "承認待ち",
+    "comment": null
+  }
+]

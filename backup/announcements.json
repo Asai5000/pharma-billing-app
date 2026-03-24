@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "システム稼働開始",
+    "content": "新しい医薬品請求システムが稼働しました。",
+    "priority": 0,
+    "displayOrder": 0,
+    "isActive": true,
+    "createdAt": "2026-02-15 09:28:01"
+  },
+  {
+    "id": 2,
+    "title": "年末年始の対応について",
+    "content": "12/29〜1/3は定期配送がお休みです。",
+    "priority": 0,
+    "displayOrder": 2,
+    "isActive": true,
+    "createdAt": "2026-02-15 09:28:01"
+  }
+]
