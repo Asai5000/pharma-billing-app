@@ -52,7 +52,7 @@ export default function LoginPage() {
                             💊
                         </div>
                         <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
-                            薬剤請求システム
+                            薬品請求システム
                         </h1>
                         <p className="mt-2 text-slate-500 text-sm">
                             アカウント情報を入力してログインしてください

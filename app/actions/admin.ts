@@ -89,6 +89,51 @@ export async function approveItem(itemId: number, quantity: number) {
     return { success: true };
 }
 
+export async function approveItemsBatch(itemsToApprove: { itemId: number, quantity: number }[]) {
+    const session = await auth();
+    if (session?.user?.role !== "admin") return { success: false, message: "Unauthorized" };
+
+    if (!itemsToApprove || itemsToApprove.length === 0) return { success: true };
+
+    const orderIdsToUpdate = new Set<number>();
+
+    for (const { itemId, quantity } of itemsToApprove) {
+        const item = await db.query.orderItems.findFirst({
+            where: eq(orderItems.id, itemId)
+        });
+        if (!item) continue;
+
+        let newApprovedTotal = (item.approvedQuantity || 0) + quantity;
+        let newStatus = "承認済み";
+
+        if (newApprovedTotal < item.quantity) {
+            newStatus = "部分承認";
+        } else if (newApprovedTotal > item.quantity) {
+            newApprovedTotal = item.quantity;
+        }
+
+        const [updatedItem] = await db.update(orderItems)
+            .set({
+                status: newStatus as any,
+                approvedQuantity: newApprovedTotal,
+                rejectedQuantity: 0
+            })
+            .where(eq(orderItems.id, itemId))
+            .returning();
+
+        if (updatedItem) {
+            orderIdsToUpdate.add(updatedItem.orderId);
+        }
+    }
+
+    for (const orderId of orderIdsToUpdate) {
+        await checkAndUpdateOrderStatus(orderId, session.user.name || "Admin");
+    }
+
+    revalidatePath("/admin");
+    return { success: true };
+}
+
 export async function rejectItem(itemId: number) {
     const session = await auth();
     if (session?.user?.role !== "admin") return { success: false, message: "Unauthorized" };

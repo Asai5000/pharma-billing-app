@@ -1,7 +1,7 @@
 "use client";
 
-import { useTransition } from "react";
-import { approveItem, rejectItem, cancelItemApproval } from "@/app/actions/admin";
+import { useState, useTransition } from "react";
+import { approveItem, rejectItem, cancelItemApproval, approveItemsBatch } from "@/app/actions/admin";
 
 type OrderItem = {
     id: number;
@@ -32,6 +32,7 @@ type ApprovalOrderDetailProps = {
 
 export default function ApprovalOrderDetail({ order, onUpdate }: ApprovalOrderDetailProps) {
     const [isPending, startTransition] = useTransition();
+    const [selectedItemIds, setSelectedItemIds] = useState<number[]>([]);
 
     // Normalize ward name
     const wardName = order.wardName || order.ward?.name || "不明な病棟";
@@ -56,6 +57,51 @@ export default function ApprovalOrderDetail({ order, onUpdate }: ApprovalOrderDe
         startTransition(async () => {
             const result = await cancelItemApproval(itemId);
             if (result.success) onUpdate();
+        });
+    };
+
+    const eligibleItems = order.items.filter(i => i.status === "承認待ち" || i.status === "部分承認");
+    const isAllSelected = eligibleItems.length > 0 && selectedItemIds.length === eligibleItems.length;
+
+    const handleSelectAll = () => {
+        if (isAllSelected) {
+            setSelectedItemIds([]);
+        } else {
+            setSelectedItemIds(eligibleItems.map(i => i.id));
+        }
+    };
+
+    const handleSelectRow = (itemId: number) => {
+        setSelectedItemIds(prev =>
+            prev.includes(itemId) ? prev.filter(id => id !== itemId) : [...prev, itemId]
+        );
+    };
+
+    const handleBatchApprove = async () => {
+        if (selectedItemIds.length === 0) return;
+
+        // Gather the quantities from inputs
+        const itemsToApprove = selectedItemIds.map(id => {
+            const input = document.getElementById(`qty-input-${id}`) as HTMLInputElement;
+            let qty = 0;
+            if (input && input.value) {
+                qty = parseInt(input.value);
+            } else {
+                // fallback if input not found (shouldn't happen)
+                const item = order.items.find(i => i.id === id);
+                qty = item ? item.quantity - (item.approvedQuantity || 0) : 0;
+            }
+            return { itemId: id, quantity: qty };
+        }).filter(item => item.quantity > 0);
+
+        if (itemsToApprove.length === 0) return;
+
+        startTransition(async () => {
+            const result = await approveItemsBatch(itemsToApprove);
+            if (result.success) {
+                setSelectedItemIds([]);
+                onUpdate();
+            }
         });
     };
 
@@ -116,6 +162,15 @@ export default function ApprovalOrderDetail({ order, onUpdate }: ApprovalOrderDe
                 <table className="min-w-full divide-y divide-slate-100">
                     <thead className="bg-slate-50 sticky top-0 z-10 shadow-sm">
                         <tr>
+                            <th className="px-6 py-4 text-left w-12">
+                                <input
+                                    type="checkbox"
+                                    checked={isAllSelected}
+                                    onChange={handleSelectAll}
+                                    disabled={eligibleItems.length === 0 || isPending}
+                                    className="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500 cursor-pointer disabled:opacity-50"
+                                />
+                            </th>
                             <th className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">薬品名 / 規格</th>
                             <th className="px-6 py-4 text-right text-xs font-bold text-slate-500 uppercase tracking-wider w-32">請求数</th>
                             <th className="px-6 py-4 text-right text-xs font-bold text-slate-500 uppercase tracking-wider w-40">承認数</th>
@@ -130,7 +185,18 @@ export default function ApprovalOrderDetail({ order, onUpdate }: ApprovalOrderDe
                             const isRejected = item.status === "却下";
 
                             return (
-                                <tr key={item.id} className={`group transition-all duration-200 ${isPendingItem || isPartial ? 'hover:bg-indigo-50/30' : 'bg-slate-50/40 text-slate-500'}`}>
+                                <tr key={item.id} className={`group transition-all duration-200 ${isPendingItem || isPartial ? 'hover:bg-indigo-50/30' : 'bg-slate-50/40 text-slate-500'} ${selectedItemIds.includes(item.id) ? 'bg-indigo-50/50' : ''}`}>
+                                    <td className="px-6 py-4">
+                                        {(isPendingItem || isPartial) && (
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedItemIds.includes(item.id)}
+                                                onChange={() => handleSelectRow(item.id)}
+                                                disabled={isPending}
+                                                className="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500 cursor-pointer disabled:opacity-50"
+                                            />
+                                        )}
+                                    </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex flex-col">
                                             <span className={`text-base font-bold ${isPendingItem || isPartial ? "text-slate-800" : "text-slate-600"}`}>{item.drugName}</span>
@@ -236,11 +302,31 @@ export default function ApprovalOrderDetail({ order, onUpdate }: ApprovalOrderDe
                 )}
             </div>
 
-            {/* Action Bar (Sticky Bottom) if needed in future, currently empty but structure ready */}
-            <div className="bg-slate-50 border-t border-slate-100 p-3 text-right">
-                <span className="text-xs font-bold text-slate-400">
+            {/* Action Bar (Sticky Bottom) */}
+            <div className="bg-slate-50 border-t border-slate-100 p-3 flex justify-between items-center sticky bottom-0 z-20">
+                <span className="text-sm font-bold text-slate-500">
                     未処理: {pendingCount} 件
                 </span>
+                <div className="flex items-center gap-3">
+                    {selectedItemIds.length > 0 && (
+                        <span className="text-sm font-bold text-indigo-600">
+                            {selectedItemIds.length}件を選択中
+                        </span>
+                    )}
+                    <button
+                        onClick={handleBatchApprove}
+                        disabled={selectedItemIds.length === 0 || isPending}
+                        className={`flex items-center gap-2 pl-4 pr-5 py-2.5 rounded-xl font-bold text-sm transition-all transform active:scale-95 disabled:scale-100 ${selectedItemIds.length > 0
+                                ? 'bg-indigo-600 text-white shadow-md hover:bg-indigo-700 hover:shadow-lg disabled:opacity-70'
+                                : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                            }`}
+                    >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        一括承認
+                    </button>
+                </div>
             </div>
         </div>
     );
