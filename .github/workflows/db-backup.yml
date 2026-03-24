@@ -1,0 +1,48 @@
+name: Daily Database Backup
+
+on:
+  schedule:
+    # 毎日 日本時間 午前3時 (UTC 午後6時) に実行
+    - cron: '0 18 * * *'
+  # 手動実行も可能にする
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    
+    # リポジトリへの書き込み権限を付与
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Backup Script
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
+        run: npx tsx scripts/backup_db.ts
+
+      - name: Commit and Push Backup
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "backup: Automated database backup 🗄️"
+          branch: database-backups
+          create_branch: true
+          file_pattern: 'backup/*.json'
+          commit_user_name: "GitHub Actions Backup Bot"
+          commit_user_email: "actions@github.com"
+          commit_author: "GitHub Actions Backup Bot <actions@github.com>"
